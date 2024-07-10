@@ -35,23 +35,10 @@
             0% { top: -10%; }
             100% { top: 110%; }
         }
-        #testButton {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-        }
-        #stopButton {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <div id="timer">00:00:00:00</div>
-    <button id="testButton" onclick="explodeConfetti()">Konfetti starten</button>
-    <button id="stopButton" onclick="stopConfetti()">Konfetti stoppen</button>
     
     <script>
         let confettiInterval;
@@ -81,7 +68,7 @@
                     clearInterval(interval);
                     display.textContent = "Party!";
                     document.body.style.backgroundColor = 'rgb(0, 255, 0)'; // endgültig grün
-                    clearInterval(confettiInterval);
+                    explodeConfetti(); // Starte das Konfetti nach Ablauf des Timers
                 }
             }
 
@@ -91,7 +78,7 @@
 
         function explodeConfetti() {
             confettiInterval = setInterval(() => {
-                for (let i = 0; i < 10; i++) { // Verdoppele die Menge an Konfetti pro Intervall
+                for (let i = 0; i < 20; i++) { // Mehr Konfetti pro Intervall hinzufügen
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
                     confetti.style.left = `${Math.random() * 100}vw`;
@@ -101,10 +88,6 @@
                     document.body.appendChild(confetti);
                 }
             }, 200); // Konfetti alle 0,2 Sekunden hinzufügen (schneller)
-        }
-
-        function stopConfetti() {
-            clearInterval(confettiInterval);
         }
 
         window.onload = function () {
